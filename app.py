@@ -294,7 +294,7 @@ app = Dash(__name__,
 
 server = app.server
 
-app.title = 'Plotrix'
+app.title = 'Plotris'
 
 app.layout = dbc.Container([
     
