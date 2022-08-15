@@ -359,7 +359,7 @@ app.layout = dbc.Container([
                       config = {'displaylogo': True,
                                 'modeBarButtonsToRemove': ['zoom', 'pan', 'select', 'zoomIn', 'zoomOut', 'autoScale', 'resetScale','lasso2d']})],
                         type = random.choice(['graph', 'cube', 'circle', 'dot' ,'default']))
-            ], xl=3,lg=3,md=3,sm=12,xs=12)
+            ], xl=3,lg=6,md=6,sm=12,xs=12)
             ],justify='center'),
         html.Br(),
         html.P('This graph was produced by animating a Plotly bar chart.',
