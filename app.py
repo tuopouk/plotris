@@ -314,15 +314,15 @@ app.layout = dbc.Container([
             
             html.Img(src = '/assets/Plotris.png', 
                      style={
-                           'text-align':'center',
-                           'position' : 'center',
+                           # 'text-align':'center',
+                           # 'position' : 'center',
                            'height' : '120px',
                            # 'width':'400px'
                            # 'padding-left':50
                      }),
             
             
-            ],xl=3,lg=3,md=3,sm=12,xs=12)
+            ],xl=3,lg=3,md=3,sm=12,xs=12,className='"d-flex justify-content-center"')
             
             
             ],justify='center'),
