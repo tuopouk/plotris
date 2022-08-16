@@ -310,6 +310,7 @@ app.layout = dbc.Container([
         #                    'text-align':'center',
         #                    'margin-bottom': '50px'}
         # ),
+        
         dbc.Row([dbc.Col([
             
             html.Img(src = '/assets/Plotris.png', 
@@ -319,10 +320,10 @@ app.layout = dbc.Container([
                            'height' : '120px',
                            # 'width':'400px'
                            # 'padding-left':50
-                     }),
+                     },className="mw-100"),
             
             
-            ],xl=3,lg=3,md=3,sm=12,xs=12,className="d-flex justify-content-center")
+            ],xl=12,lg=12,md=12,sm=12,xs=12,className="d-flex p-3 justify-content-center")
             
             
             ],justify='center'),
