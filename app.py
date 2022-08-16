@@ -322,7 +322,7 @@ app.layout = dbc.Container([
                      }),
             
             
-            ],xl=3,lg=3,md=3,sm=12,xs=12,className='"d-flex justify-content-center"')
+            ],xl=3,lg=3,md=3,sm=12,xs=12,className="d-flex justify-content-center")
             
             
             ],justify='center'),
