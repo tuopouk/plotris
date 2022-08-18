@@ -5,14 +5,15 @@ Created on Sun Aug 14 12:06:53 2022
 @author: tuomas.poukkula
 """
 
-from dash import Dash, dcc, html
+from dash import Dash, dcc, html, Input, Output
 import dash_bootstrap_components as dbc
 import plotly.graph_objs as go
 from dash_bootstrap_templates import ThemeChangerAIO
 from dash_iconify import DashIconify
-import random
 
-
+# class for Block.
+# Creates traces of 1x1 squares.
+# To be used with barmode = 'stack' layout.
 class Block:
     
     color = 'white'
@@ -29,7 +30,9 @@ class Block:
                               hoverinfo='none',
                               marker  = dict(color=color)) for x, y, color in zip(xs,ys,colors)]
 
-
+# Construct blocks column by column.
+# This Tetris version mimics 10x22 grid.
+# Which is 10 columns, 22 rows.
 
 col1 = Block(xs = 22*[1], 
              ys = 22*[1], 
@@ -65,6 +68,7 @@ col10 = Block(xs = 22*[10],
 fig1 = col1+col2+col3+col4+col5+col6+col7+col8+col9+col10
 
 
+# Create frames for animation.
 
 frames = []
 
@@ -352,21 +356,31 @@ app.layout = dbc.Container([
                                   'text-align':'center'}),
                 ])
             ], justify = 'center'),
-        
-        dbc.Row([
-            dbc.Col([
-            dcc.Loading(children = [dcc.Graph(id = 'tetris', 
-                      figure = figure,
-                      config = {'displaylogo': True,
-                                'modeBarButtonsToRemove': ['zoom', 'pan', 'select', 'zoomIn', 'zoomOut', 'autoScale', 'resetScale','lasso2d']})],
-                        type = random.choice(['graph', 'cube', 'circle', 'dot' ,'default']))
-            ], xl=3,lg=6,md=6,sm=12,xs=12)
-            ],justify='center'),
+        dbc.Row([dbc.Col([
+            
+            
+            dbc.RadioItems(id = 'selection', 
+                        options = [{'label':'Game','value':'Game'},
+                                  {'label':'Animation','value':'Animation'}],
+                        labelStyle={'display':'inline-block','font-size':18,
+                                    #'font-family':'Cadiz Book'
+                                    'text-align':'center',
+                                    'font-weight': 'bold'
+                                    },
+                        className="btn-group",
+                        inputClassName="btn-check",
+                        labelClassName="btn btn-outline-secondary",
+                        labelCheckedClassName="active",
+                      
+                        value = 'Animation'
+                      )
+            
+            
+            ], xl=3,lg=6,md=6,sm=12,xs=12, className="d-flex justify-content-center")], justify = 'center'),
         html.Br(),
-        html.P('This graph was produced by animating a Plotly bar chart.',
-               style = {
-                           'font-size':22,
-                          'text-align':'center'}),
+        dbc.Container(id = 'tetris'),
+              
+        
         
         html.Div([html.Label(['Check the Project on ', 
                 html.A('GitHub', href='https://github.com/tuopouk/plotris')
@@ -387,6 +401,50 @@ app.layout = dbc.Container([
     
     
     ], fluid = True, className = 'dbc')
+                    
+                    
+@app.callback(
+
+    Output('tetris','children'),
+    Input('selection','value')    
+    
+)
+def update_tetris_mode(selection):
+
+    if selection == 'Animation':
+        
+    
+
+       return dbc.Row([dbc.Col([dcc.Graph( 
+                 figure = figure,
+                 config = {'displaylogo': True,
+                           'modeBarButtonsToRemove': ['zoom', 'pan', 'select', 'zoomIn', 'zoomOut', 'autoScale', 'resetScale','lasso2d']}),
+               html.Br(),
+               html.P('This graph was produced by animating a Plotly bar chart.',
+                      style = {
+                                  'font-size':22,
+                                 'text-align':'center'})
+               ],xl=5,lg=5,md=5,sm=12,xs=12)
+           ],className="d-flex justify-content-center")
+    else:
+        return dbc.Row([dbc.Col([
+                        html.Div([
+                            html.Embed(src = "https://codepen.io/hankuro/embed/pWjBgZ?default-tab=result&theme-id=default",
+                               height =600)
+                            ],style={'textAlign':'center'}),
+                            html.Br(),
+                            html.P('This game is made by a third-party developer.',
+                                   style = {
+                                               'font-size':22,
+                                              'textAlign':'center'}),
+                            html.Div([html.Label(['Check this game on ', 
+                                    html.A('Codepen', href='https://codepen.io/hankuro/embed/pWjBgZ', target='_blank')
+                                    ])],
+                                     style={
+                                                 'font-size':22,
+                                                'textAlign':'center'})
+                                        ],xl=12,lg=12,md=12,sm=12,xs=12)
+                            ], className="d-flex justify-content-center")
 
 if __name__ == "__main__":
     app.run_server(debug=False)
