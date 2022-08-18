@@ -433,7 +433,8 @@ def update_tetris_mode(selection):
                                height =600)
                             ],style={'textAlign':'center'}),
                             html.Br(),
-                            html.P('This game is made by a third-party developer.',
+                            html.P('This game is made by a third-party developer. '
+                                   'Huge thanks to Hankuro!',
                                    style = {
                                                'font-size':22,
                                               'textAlign':'center'}),
