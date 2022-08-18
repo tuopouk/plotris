@@ -10,7 +10,7 @@ https://user-images.githubusercontent.com/66461922/184554142-0549c5e5-0fa7-42a3-
 
 
 # UPDATE
-I embedded a third-party Tetris by Hankuro game in it. 
+I embedded a third-party Tetris game made by Hankuro in it. 
 Here's the source:
 https://codepen.io/hankuro/embed/pWjBgZ
 
